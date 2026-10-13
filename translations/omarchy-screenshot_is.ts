@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Sýna niðurtalningu fyrir skjámyndatöku (0-60 sekúndur).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Tungumál viðmóts (til dæmis de, pt_BR eða zh_TW).</translation>
         </message>

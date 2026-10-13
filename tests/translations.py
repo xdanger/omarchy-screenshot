@@ -148,6 +148,16 @@ class Translations(unittest.TestCase):
                 expected_text = DESCRIPTION[1] if expected == "en" else self.description(expected)
                 self.assertIn(expected_text, self.run_app([*options, "--help"], env))
 
+    def test_delay_validation(self):
+        for delay in ("-1", "61", "1.5", "invalid", "2147483648"):
+            with self.subTest(delay=delay):
+                self.assertIn("--delay must be an integer", self.run_app(
+                    ["--delay", delay], code=1))
+        for delay in ("0", "5", "60"):
+            with self.subTest(delay=delay):
+                self.assertIn(SESSION_ERROR[1], self.run_app(
+                    ["--delay", delay, "--language", "en"], code=1))
+
 
 if __name__ == "__main__":
     unittest.main(argv=["translations.py"])

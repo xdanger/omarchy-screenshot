@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Näita enne jäädvustamist loendurit (0-60 sekundit).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Kasutajaliidese keel (näiteks de, pt_BR või zh_TW).</translation>
         </message>

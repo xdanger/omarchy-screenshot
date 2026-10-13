@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Mostra un conto alla rovescia prima della cattura (0-60 secondi).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Lingua dell’interfaccia (ad esempio de, pt_BR o zh_TW).</translation>
         </message>

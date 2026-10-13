@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Visa en nedräkning före skärmbilden (0-60 sekunder).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Gränssnittsspråk (till exempel de, pt_BR eller zh_TW).</translation>
         </message>

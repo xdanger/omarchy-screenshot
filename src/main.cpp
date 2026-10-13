@@ -3,6 +3,7 @@
 
 #include "capturecontroller.h"
 #include "daemonsocket.h"
+#include "countdown.h"
 #include "longimageitem.h"
 #include "pinnedimages.h"
 #include "pinnedwindows.h"
@@ -170,7 +171,9 @@ int main(int argc, char **argv) {
 
   // Parse once before translation so even --help uses the requested language.
   QList<QCommandLineOption> options = {
-      {QStringLiteral("language"), QString(), QStringLiteral("locale")}};
+      {QStringLiteral("language"), QString(), QStringLiteral("locale")},
+      {QStringLiteral("delay"), QString(), QStringLiteral("seconds"),
+       QStringLiteral("0")}};
   for (const QString &test :
        {QStringLiteral("self-test"), QStringLiteral("ui-self-test"),
         QStringLiteral("scroll-stitch-test"),
@@ -218,12 +221,21 @@ int main(int argc, char **argv) {
 
   options[0].setDescription(QCoreApplication::translate(
       "main", "Interface language (for example de, pt_BR or zh_TW)."));
+  options[1].setDescription(QCoreApplication::translate(
+      "main", "Show a countdown before capturing (0-60 seconds)."));
   QCommandLineParser parser;
   parser.setApplicationDescription(QCoreApplication::translate(
       "main", "Capture and annotate screenshots on Hyprland."));
   parser.addHelpOption();
   parser.addOptions(options);
   parser.process(app);
+
+  bool delayValid = false;
+  const int delay = parser.value(QStringLiteral("delay")).toInt(&delayValid);
+  if (!delayValid || delay < 0 || delay > 60) {
+    qCritical() << "--delay must be an integer between 0 and 60 seconds.";
+    return 1;
+  }
 
   if (app.arguments().contains(QStringLiteral("--scroll-stitch-test"))) {
     ScrollStitcher stitcher;
@@ -424,8 +436,20 @@ int main(int argc, char **argv) {
                        testSettings->path());
   }
 
-  CaptureController controller;
   QString error;
+  if (delay > 0) {
+    if (qEnvironmentVariable("XDG_SESSION_TYPE") != QStringLiteral("wayland") ||
+        qEnvironmentVariableIsEmpty("HYPRLAND_INSTANCE_SIGNATURE")) {
+      qCritical().noquote() << QCoreApplication::translate(
+          "CaptureController", "Run this application in a Hyprland Wayland session.");
+      return 1;
+    }
+    if (!showCaptureCountdown(delay, &error)) {
+      qCritical().noquote() << error;
+      return 1;
+    }
+  }
+  CaptureController controller;
   // Capturing continues on a worker thread while the overlay loads below.
   if (!controller.startCapture(&error)) {
     qCritical().noquote() << error;

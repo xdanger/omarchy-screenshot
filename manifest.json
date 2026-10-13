@@ -1,0 +1,20 @@
+{
+  "schemaVersion": 1,
+  "id": "io.github.manateelazycat.screenshot",
+  "name": "Omarchy Screenshot",
+  "version": "0.1.12",
+  "author": "Andy Stewart",
+  "license": "GPL-3.0-only",
+  "description": "Screenshot and annotation tools with scrolling capture, desktop pins, and a film-style countdown.",
+  "kinds": ["bar-widget"],
+  "entryPoints": {
+    "barWidget": "BarWidget.qml"
+  },
+  "barWidget": {
+    "displayName": "Omarchy Screenshot",
+    "description": "Left-click to capture; right-click for a five-second countdown. Requires the native omarchy-screenshot application.",
+    "category": "Utilities",
+    "allowMultiple": false,
+    "defaultSection": "right"
+  }
+}

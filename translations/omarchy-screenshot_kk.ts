@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Түсірмес бұрын кері санақты көрсету (0-60 секунд).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Интерфейс тілі (мысалы, de, pt_BR немесе zh_TW).</translation>
         </message>

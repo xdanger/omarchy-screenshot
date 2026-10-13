@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Показване на обратно броене преди заснемане (0-60 секунди).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Език на интерфейса (например de, pt_BR или zh_TW).</translation>
         </message>

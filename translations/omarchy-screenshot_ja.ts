@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>撮影前にカウントダウンを表示します（0-60 秒）。</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>インターフェースの言語（例：de、pt_BR、zh_TW）。</translation>
         </message>

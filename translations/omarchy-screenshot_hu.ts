@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Visszaszámlálás megjelenítése a rögzítés előtt (0-60 másodperc).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>A felület nyelve (például de, pt_BR vagy zh_TW).</translation>
         </message>

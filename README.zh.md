@@ -72,12 +72,16 @@ OMARCHY_SCREENSHOT_LANGUAGE=ja omarchy-screenshot
 omarchy pkg aur add omarchy-screenshot
 ```
 
-在 `~/.config/hypr/bindings.lua` 中设置截图快捷键：
+在 `~/.config/hypr/bindings.lua` 中设置截图快捷键：`Ctrl+Alt+A` 立即截图，`Ctrl+Alt+Shift+A` 延时 5 秒截图：
 
 ```lua
 hl.unbind("CTRL + ALT + A")
 o.bind("CTRL + ALT + A", "Omarchy Screenshot", "omarchy-screenshot")
+hl.unbind("CTRL + ALT + SHIFT + A")
+o.bind("CTRL + ALT + SHIFT + A", "Screenshot after 5 seconds", "omarchy-screenshot --delay 5")
 ```
+
+延时快捷键会在当前屏幕中央显示电影开拍风格的圆环倒计时，从 5 倒数到 1；等待期间可以切换窗口或展开菜单，提示不会抢占键盘或鼠标。倒计时结束后，提示先完全淡出并关闭，再抓取画面并显示选区界面，截图不会包含倒计时。也可以运行 `omarchy-screenshot --delay 5`，`--delay` 支持 0–60 秒，默认 0 表示立即截图。
 
 从源码构建需要 `cmake`、`gcc`、`pkgconf`、`qt6-base`、`qt6-declarative`、`qt6-wayland`、`qt6-tools`、`layer-shell-qt`、`wayland`、`wayland-protocols`、`grim`、`wl-clipboard` 和 `hyprland`。默认测试还需要 `python`，可用 `-DBUILD_TESTING=OFF` 关闭。
 
@@ -94,6 +98,19 @@ cmake -S . -B build -DCMAKE_INSTALL_PREFIX=$HOME/.local -DSYSTEMD_USER_UNIT_DIR=
 cmake --build build -j
 cmake --install build
 ```
+
+### Omarchy 栏插件
+
+仓库也提供 Quickshell 栏按钮，插件 ID 为 `io.github.manateelazycat.screenshot`。需要先安装原生截图程序；标准插件安装只安装栏按钮，不会编译或安装 Qt 程序。5 秒倒计时要求原生程序版本 0.1.12 或更新版本。
+
+```sh
+omarchy pkg aur add omarchy-screenshot
+omarchy plugin add https://github.com/manateelazycat/omarchy-screenshot --enable
+```
+
+左键点击相机按钮立即截图，右键点击显示 5 秒圆环倒计时。插件从 `PATH` 启动 `omarchy-screenshot`；使用本地构建时，可在栏配置中的对应条目设置 `"command": "/home/yourname/.local/bin/omarchy-screenshot"`。安装栏按钮不会修改 Hyprland 快捷键，快捷键按上方示例手动配置。
+
+卸载栏按钮：`omarchy plugin remove io.github.manateelazycat.screenshot`。需要同时卸载 AUR 程序时，运行 `omarchy pkg drop omarchy-screenshot`。从源码安装到 `~/.local` 时，先用 `systemctl --user disable --now omarchy-screenshot.socket` 和 `systemctl --user stop omarchy-screenshot.service` 停止可选的常驻进程，再删除 `~/.local/bin/omarchy-screenshot` 及安装的 `omarchy-screenshot.service`、`omarchy-screenshot.socket` 用户服务文件；从 `~/.config/hypr/bindings.lua` 移除自己添加的快捷键。
 
 ### 测试
 
@@ -116,7 +133,7 @@ systemctl --user enable --now omarchy-screenshot.socket   # 开启
 systemctl --user disable --now omarchy-screenshot.socket  # 关闭并停止后台进程
 ```
 
-无 systemd 时可将 `omarchy-screenshot --daemon` 加入会话自启动。快捷键无需修改；仅无参数启动转交后台进程，`--language` 和自测独立运行。
+无 systemd 时可将 `omarchy-screenshot --daemon` 加入会话自启动。快捷键无需修改；仅无参数启动转交后台进程，`--language`、`--delay` 和自测独立运行。
 
 运行 `systemctl --user edit omarchy-screenshot.service` 可修改空闲超时（秒，`0` 表示不退出），保留实际安装路径：
 

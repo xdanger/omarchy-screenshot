@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: GPL-3.0-only
 
 cmake_minimum_required(VERSION 3.21)
-project(omarchy_screenshot VERSION 0.1.11 LANGUAGES C CXX)
+project(omarchy_screenshot VERSION 0.1.12 LANGUAGES C CXX)
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -60,6 +60,8 @@ qt_add_executable(omarchy-screenshot
     src/pinnedimages.h
     src/pinnedwindows.cpp
     src/pinnedwindows.h
+    src/countdown.cpp
+    src/countdown.h
     src/scrollstitcher.cpp
     src/scrollstitcher.h
     src/longimageitem.cpp
@@ -82,10 +84,11 @@ set_source_files_properties(qml/LongOverlay.qml PROPERTIES QT_RESOURCE_ALIAS Lon
 set_source_files_properties(qml/ScrollCapture.qml PROPERTIES QT_RESOURCE_ALIAS ScrollCapture.qml)
 set_source_files_properties(qml/SelectionResizeHandle.qml PROPERTIES QT_RESOURCE_ALIAS SelectionResizeHandle.qml)
 set_source_files_properties(qml/PinOverlay.qml PROPERTIES QT_RESOURCE_ALIAS PinOverlay.qml)
+set_source_files_properties(qml/Countdown.qml PROPERTIES QT_RESOURCE_ALIAS Countdown.qml)
 qt_add_qml_module(omarchy-screenshot
     URI OmarchyScreenshot
     VERSION 1.0
-    QML_FILES qml/Overlay.qml qml/ToolbarGlyph.qml qml/AnnotationToolbar.qml qml/LongOverlay.qml qml/ScrollCapture.qml qml/SelectionResizeHandle.qml qml/PinOverlay.qml
+    QML_FILES qml/Overlay.qml qml/ToolbarGlyph.qml qml/AnnotationToolbar.qml qml/LongOverlay.qml qml/ScrollCapture.qml qml/SelectionResizeHandle.qml qml/PinOverlay.qml qml/Countdown.qml
 )
 
 target_link_libraries(omarchy-screenshot PRIVATE
@@ -196,6 +199,18 @@ install(FILES
 
 include(CTest)
 if(BUILD_TESTING)
+    qt_add_executable(tst-countdown tests/tst_countdown.cpp src/countdown.cpp src/countdown.h)
+    target_include_directories(tst-countdown PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
+    target_link_libraries(tst-countdown PRIVATE
+        Qt6::Quick Qt6::Test LayerShellQt::Interface PkgConfig::WAYLAND_CLIENT)
+    qt_add_resources(tst-countdown countdown
+        PREFIX /qt/qml/OmarchyScreenshot
+        BASE qml
+        FILES qml/Countdown.qml)
+    add_test(NAME countdown COMMAND tst-countdown)
+    set_tests_properties(countdown PROPERTIES
+        ENVIRONMENT "QT_QPA_PLATFORM=offscreen;QT_QPA_PLATFORMTHEME=;QT_QUICK_BACKEND=software"
+        TIMEOUT 15)
     qt_add_executable(tst-preview-scaling tests/tst_preview_scaling.cpp)
     target_include_directories(tst-preview-scaling PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}/src)
     target_link_libraries(tst-preview-scaling PRIVATE Qt6::Quick Qt6::Test)

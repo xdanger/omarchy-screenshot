@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Rādīt atpakaļskaitīšanu pirms uzņemšanas (0-60 sekundes).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Saskarnes valoda (piemēram, de, pt_BR vai zh_TW).</translation>
         </message>

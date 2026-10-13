@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>გადაღებამდე უკუთვლის ჩვენება (0-60 წამი).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>ინტერფეისის ენა (მაგალითად, de, pt_BR ან zh_TW).</translation>
         </message>

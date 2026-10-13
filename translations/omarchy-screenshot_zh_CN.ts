@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>截图前显示倒计时（0-60 秒）。</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>界面语言（例如 de、pt_BR 或 zh_TW）。</translation>
         </message>

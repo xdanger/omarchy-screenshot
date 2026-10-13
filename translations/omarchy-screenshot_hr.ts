@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Prikaži odbrojavanje prije snimanja (0-60 sekundi).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Jezik sučelja (na primjer de, pt_BR ili zh_TW).</translation>
         </message>

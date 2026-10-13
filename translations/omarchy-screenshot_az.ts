@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Çəkməzdən əvvəl geri sayım göstərin (0-60 saniyə).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>İnterfeys dili (məsələn, de, pt_BR və ya zh_TW).</translation>
         </message>

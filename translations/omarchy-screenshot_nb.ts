@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Vis en nedtelling før opptak (0-60 sekunder).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Grensesnittspråk (for eksempel de, pt_BR eller zh_TW).</translation>
         </message>

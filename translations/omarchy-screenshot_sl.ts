@@ -313,6 +313,10 @@
     <context>
         <name>main</name>
         <message>
+            <source>Show a countdown before capturing (0-60 seconds).</source>
+            <translation>Prikaži odštevanje pred zajemom (0-60 sekund).</translation>
+        </message>
+        <message>
             <source>Interface language (for example de, pt_BR or zh_TW).</source>
             <translation>Jezik vmesnika (na primer de, pt_BR ali zh_TW).</translation>
         </message>
